@@ -1,0 +1,2847 @@
+/* =========================================
+   1. GLOBAL STYLES & RESET
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-size: cover;
+  /* Default text is white for dark backgrounds, 
+     but specific white cards must override this to #333 */
+  color: #fff; 
+}
+
+/* =========================================
+   2. NAVIGATION BAR
+   ========================================= */
+.navbar {
+  background-color: #20621E;
+  display: flex;
+  justify-content: space-between; /* Pushes Logo Left, Links Center, Auth Right */
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  max-width: 40px; 
+  max-height: 40px;
+  margin-right: 8px;
+}
+
+/* Navigation Links (Centered) */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0; /* Removes default margin */
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+  background: #c8e6c9;
+}
+
+/* Auth Buttons Container (Right Side) */
+.auth-buttons {
+  display: flex;
+  align-items: center; /* Vertically centers the icon and buttons */
+  gap: 15px; /* Adds space between User Icon, Chat, and Logout */
+}
+
+.auth-buttons button {
+  background-color: #ffffff;
+  color: #20621E;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-buttons button:hover {
+  background-color: #c8e6c9;
+}
+
+/* --- NEW USER ICON STYLES (Moved here for better organization) --- */
+.nav-user-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;       /* Circle shape */
+    object-fit: cover;        /* Prevents image stretching */
+    border: 2px solid white;  /* White border to pop against green */
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.nav-user-icon:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  /* Keep auth buttons visible or add a hamburger menu here if needed */
+  .logo { font-size: 1.5rem; }
+}
+
+/* =========================================
+   3. HERO SECTION & SLIDER
+   ========================================= */
+
+/* The main container needs a fixed height */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 85vh; /* Takes up 85% of the screen height */
+  min-height: 600px; /* Ensures it doesn't get too small on laptops */
+  overflow: hidden; /* Hides parts of images that spill out */
+  background-color: #333; /* Fallback color */
+}
+
+/* The slider container fills the hero section */
+.hero-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* The individual slides */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+/* The active slide becomes visible */
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Overlay to make text readable */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35); /* Dark overlay */
+  z-index: 2;
+}
+
+/* Center the Caption Text */
+.slide-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfect centering */
+  text-align: center;
+  color: white;
+  z-index: 3;
+  width: 80%;
+  max-width: 900px;
+}
+
+.slide-caption h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.slide-caption p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+/* Navigation Buttons (Arrows) */
+.hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 15px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.hero-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hero-btn.prev { left: 20px; }
+.hero-btn.next { right: 20px; }
+
+/* Responsive Text for Mobile */
+@media (max-width: 768px) {
+    .slide-caption h2 { font-size: 2rem; }
+    .slide-caption p { font-size: 1rem; }
+    .hero { height: 60vh; min-height: 400px; }
+}
+
+/* =========================================
+   MAIN DASHBOARD STATS (2026 Modern Trend)
+   ========================================= */
+
+.main-dashboard {
+  padding: 80px 20px; /* More breathing room top/bottom */
+  /* Subtle vertical fade background */
+  background: linear-gradient(180deg, #f8fcf8 0%, #eef2f3 100%);
+  text-align: center;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Wider gap for a cleaner, less cramped look */
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* THE CARD STYLE */
+.stat-box {
+  background: #ffffff;
+  padding: 50px 30px;
+  border-radius: 24px; /* Super rounded corners are very trendy */
+  width: 320px;        /* Slightly wider card */
+  position: relative;
+  
+  /* Soft, diffused shadow for depth without heaviness */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle border for crispness */
+  
+  /* Bouncy spring animation on hover */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  overflow: hidden; 
+  z-index: 1;
+}
+
+/* DECORATIVE TOP GRADIENT LINE (Replaces old bottom border) */
+.stat-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #20621E, #66bb6a); /* Green gradient */
+  opacity: 1;
+}
+
+/* HOVER EFFECT: Lift & Green Glow */
+.stat-box:hover {
+  transform: translateY(-12px); /* Lifts up nicely */
+  /* The shadow gets larger and takes on a slight green tint */
+  box-shadow: 0 25px 50px rgba(32, 98, 30, 0.15); 
+}
+
+/* TYPOGRAPHY - THE NUMBERS */
+.stat-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; 
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1;
+  
+  /* The Gradient Effect */
+  background: linear-gradient(135deg, #1b4d18 0%, #2e7d32 100%);
+  
+  /* 1. Vendor prefix (needed for Chrome/Safari/Edge) */
+  -webkit-background-clip: text;
+  
+  /* 2. Standard property (needed for Firefox & Future compatibility) */
+  background-clip: text; 
+  
+  /* 3. Fill color transparent so background shows through */
+  -webkit-text-fill-color: transparent;
+  
+  /* 4. Fallback color (if browser doesn't support clipping) */
+  color: #20621E; 
+}
+
+/* TYPOGRAPHY - THE NUMBERS (Smaller & Cleaner) */
+.stat-box h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.5rem; /* Reduced from 4.5rem to 3.5rem */
+  font-weight: 700;  /* Slightly lighter bold for better balance */
+  color: #20621E;    /* Keep the Green Brand Color */
+  margin-bottom: 8px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.05); 
+}
+
+/* TYPOGRAPHY - THE LABELS (Black Text) */
+.stat-box p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem; /* Slightly larger for readability */
+  font-weight: 700;   /* Bold to match the black color */
+  color: #222222;     /* Changed from Grey to Solid Black */
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* Slightly reduced spacing for tightness */
+  margin: 0;
+}
+
+/* OPTIONAL DECORATION: Subtle Circle in Corner */
+.stat-box::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(32,98,30,0.04) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================================
+   4. IMAGE GALLERY (Strict 5-Column Grid)
+   ========================================= */
+
+.image-gallery {
+  display: grid;
+  /* THE KEY CHANGE: Force exactly 5 equal columns */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px; /* Slightly tighter gap to tit 5 items nicely */
+  padding: 20px;
+  max-width: 1400px; /* Increase max-width slightly to accommodate 5 items */
+  margin: 40px auto;
+}
+
+/* THE CARD CONTAINER (Fixed Height & Modern Style) */
+.gallery-item {
+  position: relative;
+  border-radius: 16px; /* Rounded corners */
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  cursor: pointer;
+  
+  /* FIXED HEIGHT ENSURES UNIFORMITY */
+  height: 250px; /* A good height for a 5-column layout */
+  width: 100%;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* THE IMAGE (Smart Crop to fill the box) */
+.gallery-item img, 
+.image-gallery img { 
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crucial: crops image to fit the 250px height perfectly */
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* HOVER EFFECTS */
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1); /* Subtle zoom on hover */
+}
+
+/* THE CAPTION (Glassmorphism style) */
+.gallery-item p {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px; /* Stretch across bottom */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* Stronger glass effect */
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  
+  /* Animation - appear on hover */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS (Crucial for 5-column grids)
+   ========================================= */
+
+/* On Laptop/Tablet Landscape (below 1200px): Switch to 4 columns */
+@media (max-width: 1200px) {
+    .image-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* On Tablets (below 900px): Switch to 3 columns */
+@media (max-width: 900px) {
+    .image-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+     .gallery-item { height: 220px; } /* Slightly shorter height */
+}
+
+/* On Large Phones (below 600px): Switch to 2 columns */
+@media (max-width: 600px) {
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .gallery-item { height: 200px; }
+    /* On mobile, maybe always show caption instead of hover */
+    .gallery-item p {
+        opacity: 1; 
+        transform: translateY(0);
+        background: rgba(0,0,0,0.5); /* Darker background for readability on small screens */
+        border: none;
+    }
+}
+
+/* =========================================
+   5. DASHBOARD & HOME SECTIONS
+   ========================================= */
+.dashboard {
+  position: relative;
+  background-image: url('img/analytical.bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 60px 30px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 15px;
+}
+
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 0;
+}
+
+.dashboard * { position: relative; z-index: 1; }
+
+.dashboard-header { text-align: center; margin-bottom: 40px; }
+.dashboard-header h2 { font-size: 28px; margin-bottom: 5px; }
+.dashboard-header p { font-size: 16px; color: #cdd9ff; }
+
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.stat h3 { font-size: 48px; margin: 0; color: white; }
+.stat p { font-size: 16px; color: #d8e0ff; margin-top: 5px; }
+
+.visitors { margin-bottom: 40px; }
+.visitors h3 { font-size: 20px; margin-bottom: 20px; color: white; }
+
+.bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.bar span { width: 100px; }
+.bar div {
+  background-color: white;
+  color: #002366;
+  height: 22px;
+  border-radius: 4px;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.feedback-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgba(255,255,255,0.95);
+  color: #222;
+  border-radius: 8px;
+  padding: 30px;
+  gap: 40px;
+}
+
+.feedback { flex: 2; }
+.feedback h3 {
+  background-color: #222;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.feedback p { margin-bottom: 20px; font-size: 15px; line-height: 1.5; }
+.feedback strong { color: #333; }
+
+.popular { flex: 1; }
+.popular h3 { font-size: 18px; margin-bottom: 10px; color: #002366; }
+.popular ol { margin-left: 20px; margin-bottom: 20px; }
+.popular li { margin-bottom: 5px; }
+
+@media (max-width: 768px) {
+  .dashboard-stats { flex-direction: column; gap: 20px; }
+  .feedback-section { flex-direction: column; }
+}
+
+.explore-deeper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff; /* White background */
+  padding: 80px 20px;        /* Spacing top/bottom */
+  text-align: center;
+}
+
+.explore-box {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  
+  /* REMOVED: height, background-image, box-shadow, border-radius */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.explore-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #20621E;  /* EduGreenTourism Green */
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.explore-box p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;     /* Dark Grey for easy reading (standard across site) */
+  max-width: 850px;
+}
+
+/* =========================================
+   6. DISCOVER HERO (Full Screen & Cinematic)
+   ========================================= */
+
+/* A. THE CONTAINER (Limits width for elegance) */
+#discover-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px; 
+}
+
+/* C. ATTRACTION SECTIONS (The Cards) */
+.attraction-section {
+    position: relative;
+    
+    /* CHANGE IS HERE: Increase height to be massive and immersive */
+    height: 85vh;          /* Takes up 85% of the screen height */
+    min-height: 700px;     /* Ensure it never gets smaller than this */
+    
+    border-radius: 32px;   /* Keep trendy corners */
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2); /* Deeper shadow for big cards */
+    
+    /* THE PARALLAX BACKGROUND SETUP */
+    background-attachment: fixed; 
+    background-position: center center; /* Focus on the middle of the image */
+    background-size: cover; /* Crucial: Fills the bigger area completely */
+    background-repeat: no-repeat;
+    
+    display: flex;
+    align-items: center; /* Vertically center the text box */
+    padding: 0 60px;     /* Spacing from sides */
+    margin-bottom: 100px; /* More space between these big sections */
+    
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease forwards;
+}
+
+/* Keep the Zig-Zag layout */
+.attraction-section:nth-child(odd) { justify-content: flex-start; }
+.attraction-section:nth-child(even) { justify-content: flex-end; }
+
+
+/* --- MOBILE ADJUSTMENT --- */
+/* Ensure it doesn't break on phones where parallax is usually disabled */
+@media (max-width: 768px) {
+    .attraction-section {
+        height: auto; /* Let content dictate height on mobile */
+        min-height: 500px;
+        background-attachment: scroll; /* Important: scroll on mobile */
+        background-position: center;
+        padding: 30px 20px;
+        margin-bottom: 40px;
+    }
+}
+
+/* B. HERO SECTION */
+.discover-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* FORCE FULL SCREEN HEIGHT */
+    min-height: 600px;
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keep the nice parallax effect */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 60px; /* Space before the attraction cards start */
+}
+
+/* Dark overlay to make text pop */
+.discover-hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    z-index: 1;
+}
+
+/* THE HERO TEXT CONTENT */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+    animation: heroFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem; /* Massive, trendy title */
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* THE CTA BUTTON (Modern Pill Shape) */
+.hero-text .cta-btn {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #20621E; /* EduGreen Theme */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px; /* Pill shape */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(32, 98, 30, 0.4);
+    border: 2px solid transparent;
+}
+
+.hero-text .cta-btn:hover {
+    background-color: transparent;
+    border-color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Animation */
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .discover-hero {
+        height: 100vh; /* Keep it full screen on mobile */
+        background-attachment: scroll; /* Disable parallax on phones for performance */
+    }
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-text p { font-size: 1rem; }
+}
+
+@keyframes fadeSlideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(40px); /* Start slightly down */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);    /* End in correct position */
+    }
+}
+
+/* OPTIONAL: Safety fallback to ensure content appears even if animation fails */
+.attraction-section {
+    opacity: 1; /* Change default to visible */
+    animation: fadeSlideUp 0.8s ease forwards;
+}
+
+.learn-section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
+.learn-section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: #20621E; font-weight: 700; }
+.learn-section p { color: #333; line-height: 1.7; text-align: justify; }
+
+.accordion {
+  background-color: #20621E;
+  color: #fff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 18px;
+  transition: 0.3s;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.accordion.active, .accordion:hover { background-color: #2b8a3e; }
+.accordion:after { content: '\002B'; float: right; font-weight: bold; }
+.accordion.active:after { content: "\2212"; }
+
+.panel {
+  padding: 0 18px;
+  background-color: #f9f9f9;
+  display: none;
+  overflow: hidden;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 10px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.read-more-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #627c62;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.read-more-btn:hover { background-color: #4e654e; }
+
+.learn-photo-section {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+.learn-photo {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   7. CONTACT PAGE
+   ========================================= */
+.contact-header {
+  margin-top: 90px;
+  text-align: center;
+  padding: 60px 10%;
+  /* Ensure the background image is loaded or use a fallback color */
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("https://lenggonggeopark.com/wp-content/uploads/2024/12/Harimau-Malaya-Banjaran-Titiwangsa-1.jpg") center/cover no-repeat;
+  background-color: #20621E; /* Fallback */
+  color: white;
+}
+.contact-header h1 { font-size: 44px; font-family: 'Playfair Display', serif; }
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px; /* Increased slightly for better spacing */
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap; /* Allows stacking on mobile */
+}
+
+/* LEFT SIDE: Contact Info (50%) */
+.contact-info { 
+  flex: 1; 
+  min-width: 300px; /* Prevents it from getting too small */
+}
+
+/* FIX: Text Color was white, now it's Dark Green */
+.contact-info h2 { 
+  font-family: 'Playfair Display', serif; 
+  margin-bottom: 15px; 
+  color: #20621E; 
+  font-size: 2rem;
+}
+
+/* FIX: Paragraph Color was invisible, now it's Grey */
+.contact-info p {
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-left: 5px solid #20621E; /* Added a nice accent border */
+}
+.info-left { display: flex; flex-direction: column; }
+.info-left strong { font-size: 14px; color: #333; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.info-left a, .info-left address { font-size: 15px; color: #2b8a3e; text-decoration: none; font-style: normal; }
+
+/* =========================================
+   ADD THIS TO SECTION 7. CONTACT PAGE
+   ========================================= */
+
+.copy-btn {
+    background-color: transparent;
+    border: 1px solid #20621E;
+    color: #20621E;
+    padding: 6px 16px;
+    border-radius: 20px; /* Pill shape */
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevents text from breaking */
+}
+
+/* Hover Effect */
+.copy-btn:hover {
+    background-color: #20621E;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(32, 98, 30, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Click Effect */
+.copy-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* RIGHT SIDE: Contact Form (50%) */
+.contact-form {
+  flex: 1;
+  min-width: 300px; /* Prevents it from getting too small */
+  background: #ffffff;
+  padding: 30px; /* Increased padding for better look */
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 { font-family: 'Playfair Display', serif; margin-top: 0; margin-bottom: 20px; color: #20621E; }
+
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  font-family: Poppins, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border 0.3s;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: #20621E;
+    outline: none;
+    background-color: #fff;
+}
+
+.contact-form textarea { min-height: 160px; resize: vertical; }
+
+#sendBtn {
+  width: 100%;
+  padding: 15px;
+  background: #2b8a3e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#sendBtn:hover { background: #1e6a2d; }
+
+.success-text {
+    margin-top: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.map-wrap { width: 100%; margin-top: 50px; display: flex; justify-content: center; }
+#mapFrame { width: 75%; height: 600px; border: 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+
+/* =========================================
+   8. ITINERARY PAGE
+   ========================================= */
+body.itinerary-page .itinerary-content {
+    max-width: 1100px;
+    margin: 120px auto 40px;
+    padding: 0 20px;
+}
+
+body.itinerary-page .itinerary-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #20621E;
+    margin-bottom: 10px;
+}
+
+body.itinerary-page .itinerary-header p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Booking Selector */
+body.itinerary-page .booking-selector {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+body.itinerary-page .booking-selector h2,
+body.itinerary-page .booking-selector p,
+body.itinerary-page .booking-selector label {
+    color: #333 !important; /* Force Dark Text on White Card */
+}
+
+body.itinerary-page .selection-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+body.itinerary-page .input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+body.itinerary-page .booking-selector input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+}
+
+body.itinerary-page .check-btn {
+    padding: 10px 20px;
+    background-color: #20621E;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+body.itinerary-page .check-btn:hover { background-color: #2b8a3e; }
+body.itinerary-page .error-message { color: #d9534f; margin-top: 10px; }
+
+/* Package Cards */
+body.itinerary-page .available-packages-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+body.itinerary-page .package-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent;
+}
+
+body.itinerary-page .package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+/* Selected State for Package Card */
+body.itinerary-page .package-card.selected {
+    border: 2px solid #20621E !important;
+    background-color: #f0fdf4 !important;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(32, 98, 30, 0.3);
+}
+
+body.itinerary-page .package-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #20621E;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+body.itinerary-page .package-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background-color: #eee; /* Fallback for broken images */
+    display: block;
+}
+
+body.itinerary-page .package-details {
+    padding: 15px;
+}
+
+body.itinerary-page .package-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #333 !important; /* Force visibility */
+    font-family: 'Poppins', sans-serif;
+}
+
+body.itinerary-page .package-details p {
+    color: #666; 
+}
+
+body.itinerary-page .package-buttons button {
+    padding: 6px 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+body.itinerary-page .see-details-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+body.itinerary-page .see-details-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* === MODAL STYLES (Fixed Visibility) === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    position: relative;
+    /* FIX: Force text color to be dark so it is visible on white background */
+    color: #333 !important; 
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-btn:hover { color: #000; }
+
+.book-slot-btn {
+    background-color: #2b8a3e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* =========================================
+   9. CUSTOM BUILDER & PROGRAMS
+   ========================================= */
+.section-divider {
+    margin: 60px 0;
+    border: 0;
+    height: 1px;
+    background: #ccc;
+}
+
+.custom-package-section {
+    background-color: #f9fdf9;
+    color: #333; /* Dark Grey Text */
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 60px;
+}
+
+.custom-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #20621E;
+    margin-bottom: 10px;
+}
+
+.custom-activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.program-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #bbf7d0;
+}
+
+/* Selected Program Card */
+.program-card.selected {
+    border: 2px solid #20621E;
+    background-color: #f0fdf4;
+}
+
+.program-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #20621E; color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.program-card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    background-color: #e0e0e0; /* Stable background */
+}
+
+.program-card-body {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.program-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.program-card-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.program-card-price {
+    color: #20621E;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.btn-details {
+    width: 100%;
+    padding: 8px 0;
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.btn-details:hover { background-color: #e0e0e0; color: #333; }
+
+/* Small Add Button */
+.add-btn-small {
+    background-color: #f0f0f0;
+    color: #20621E;
+    border: 1px solid #20621E;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.add-btn-small:hover { background-color: #20621E; color: white; }
+
+/* =========================================
+   10. STICKY BARS & CHECKOUT
+   ========================================= */
+#custom-sticky-bar, #package-sticky-bar {
+    position: fixed;
+    bottom: -150px; /* Hidden initially */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    z-index: 9999;
+    transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    border-top: 1px solid #e0e0e0;
+}
+
+#custom-sticky-bar.visible, #package-sticky-bar.visible {
+    bottom: 0;
+}
+
+/* Main Flex Container */
+.sticky-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Left Side: Name & Price */
+.sticky-info { 
+    font-family: 'Poppins', sans-serif; 
+    color: #333; 
+    flex-grow: 1; /* Allows title to take available space */
+}
+.sticky-total { 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    color: #20621E; 
+    margin-left: 5px; 
+}
+
+/* Right Side: Dates, Pax, Button */
+.sticky-controls { 
+    display: flex; 
+    align-items: center; /* Vertically centers inputs, pax, and button */
+    gap: 15px; 
+}
+
+/* --- NEW: Force Date Inputs Side-by-Side --- */
+.sticky-date-container {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    gap: 10px;           /* Space between the two inputs */
+    align-items: center;
+}
+
+.sticky-date-container input[type="date"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    outline: none;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 0.9rem;
+    height: 42px; /* Matches button height */
+}
+
+.sticky-date-container input[type="date"]:focus {
+    border-color: #20621E;
+    background: #fff;
+}
+
+/* Pax Controls (Label on top, buttons below) */
+.pax-selector { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.pax-selector label { 
+    color: #666 !important; 
+    font-size: 0.7rem; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+}
+
+/* Row for Minus/Number/Plus */
+.pax-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pax-btn {
+    width: 28px; height: 28px;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    color: #20621E;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    line-height: 1;
+}
+.pax-btn:hover { 
+    background-color: #20621E; 
+    color: white; 
+    border-color: #20621E; 
+}
+
+#pax-display, #pkg-pax-display {
+    color: #333 !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Checkout Button */
+.btn-sticky-checkout {
+    background-color: #20621E;
+    color: white;
+    padding: 0 25px; /* Horizontal padding only */
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    height: 42px; /* Fixed height to match inputs */
+    line-height: 42px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(32, 98, 30, 0.2);
+}
+.btn-sticky-checkout:hover { 
+    background-color: #1a5218; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(32, 98, 30, 0.3);
+}
+
+/* Responsive: Stack vertically on mobile */
+@media (max-width: 900px) {
+    .sticky-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .sticky-controls {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .sticky-date-container {
+        flex-grow: 1; /* Dates expand to fill space */
+    }
+    .btn-sticky-checkout {
+        flex-grow: 1; /* Button expands */
+    }
+}
+
+/* =========================================
+   11. LOGIN & SIGNUP PAGES
+   ========================================= */
+body.login-page, body.signup-page {
+  font-family: "Poppins", sans-serif;
+  margin: 0; padding: 0; padding-top: 90px;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  background: #f0f4f8;
+  color: #000;
+}
+
+.login-section, .signup-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-section .container, .signup-section .container {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-section h2, .signup-section h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #20621E;
+}
+
+.login-section input, .signup-section input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.login-section button, .signup-section button {
+  width: 100%;
+  padding: 12px;
+  background-color: #20621E;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.login-section button:hover, .signup-section button:hover { background-color: #2b8a3e; }
+
+.form-footer a { color: #20621E; text-decoration: none; font-weight: 500; }
+
+/* =========================================
+   12. CHECKOUT PAGE (Smart Minimalist Redesign)
+   ========================================= */
+
+/* 1. Main Layout: Clean Grid with Breathing Room */
+.checkout-container {
+    max-width: 1100px;
+    margin: 110px auto 80px; /* More top margin to clear navbar */
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr; /* Form takes 60%, Summary 40% */
+    gap: 60px; /* Generous gap for minimalism */
+    align-items: start;
+}
+
+/* 2. Section Cards (The "Paper" Look) */
+.checkout-section {
+    background: transparent; /* Removed white box from form side for cleaner look */
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+/* 3. Typography: Hierarchy & Focus */
+h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    padding-bottom: 0;
+    border-bottom: none; /* Removed heavy line */
+    position: relative;
+}
+
+/* Smart Indicator Line */
+h2.section-title::before {
+    content: '1';
+    position: absolute;
+    left: -40px;
+    top: 5px;
+    width: 28px;
+    height: 28px;
+    background: #20621E;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Hidden by default, useful if you want to add steps via JS */
+}
+
+/* 4. Modern Input Fields - High Contrast Update */
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="tel"] {
+    width: 100% !important;
+    padding: 16px 20px !important;
+    
+    /* CHANGED: Darker background so it pops against white page */
+    background-color: #f0f2f0; 
+    
+    /* CHANGED: Added a light grey border to define the edges */
+    border: 1px solid #dcdcdc !important; 
+    
+    border-radius: 12px !important;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    transition: all 0.3s ease;
+    margin-bottom: 20px !important;
+    
+    /* OPTIONAL: Subtle shadow to make it lift off the page slightly */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
+}
+
+/* Focus State remains the same (Green Glow) */
+.checkout-form input:focus {
+    background-color: #ffffff;
+    border-color: #20621E !important;
+    box-shadow: 0 0 0 4px rgba(32, 98, 30, 0.1) !important;
+    outline: none;
+}
+
+/* 5. Payment Methods: Interactive Cards */
+.payment-option-label {
+    display: flex !important;
+    align-items: center;
+    padding: 20px !important;
+    border: 2px solid #f0f0f0 !important; /* Clean subtle border */
+    background: #ffffff;
+    border-radius: 16px !important;
+    margin-bottom: 15px !important;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-option-label:hover {
+    border-color: #cce5cc !important;
+    transform: translateY(-2px);
+}
+
+/* The "Selected" State using :has() - Modern Browser Feature */
+.payment-option-label:has(input:checked) {
+    border-color: #20621E !important;
+    background-color: #f8fcf8;
+    box-shadow: 0 8px 20px rgba(32, 98, 30, 0.1);
+}
+
+/* Hide default radio circle, create a custom checkmark */
+.payment-option-label input[type="radio"] {
+    accent-color: #20621E; /* Simple modern native color */
+    width: 20px;
+    height: 20px;
+}
+
+/* 6. Order Summary: The "Sticky Ticket" */
+.order-summary-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 24px; /* Super rounded modern look */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08); /* Floating elevation */
+    border: 1px solid rgba(0,0,0,0.03);
+    position: sticky;
+    top: 100px !important; /* Sticks nicely when scrolling */
+}
+
+/* Summary Details */
+#summary-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 15px 0 5px 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.summary-row span:last-child {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Collage Image Container */
+.summary-collage-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Total Section */
+.summary-total {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #eee; /* "Coupon" style dash */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#summary-total-cost {
+    font-size: 1.6rem !important;
+    color: #20621E !important;
+    letter-spacing: -0.5px;
+}
+
+/* 7. The Confirm Button (CTA) */
+.confirm-btn {
+    margin-top: 30px !important;
+    width: 100%;
+    padding: 18px !important;
+    background: #20621E !important;
+    color: white;
+    border: none;
+    border-radius: 50px !important; /* Pill shape */
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(32, 98, 30, 0.25);
+    transition: all 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background: #1a5218 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(32, 98, 30, 0.35);
+}
+
+.confirm-btn:active {
+    transform: scale(0.98);
+}
+
+/* 8. Donation Checkbox Styling */
+#donate-checkbox {
+    width: 20px !important;
+    height: 20px !important;
+    accent-color: #20621E;
+    margin-right: 12px !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .checkout-container {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 40px;
+    }
+    
+    .order-summary-card {
+        position: relative; /* Not sticky on mobile */
+        top: 0 !important;
+        order: -1; /* Move Summary ABOVE form on mobile (UX Best Practice) */
+    }
+}
+
+/* =========================================
+   13. FOOTER
+   ========================================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2d5a27;
+  color: white;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* CONFLICT TOAST */
+#conflict-toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #d9534f;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+#conflict-toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* Force the modal description to respect new lines */
+#prog-modal-desc {
+    white-space: pre-line; /* Converts database line breaks into HTML line breaks */
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* ============================
+   AI CHATBOT STYLES (MODERN FIXED)
+   ============================ */
+.chat-widget {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 85px;
+  right: 30px;
+  width: 350px;
+  height: 500px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  z-index: 9999;
+  flex-direction: column;
+  overflow: hidden; /* Clips content to rounded corners */
+  border: 1px solid #e0e0e0;
+  font-family: 'Poppins', sans-serif;
+  
+  /* Smooth Fade In/Up Animation */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* The 'active' class makes it visible */
+.chat-widget.active {
+  display: flex !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 1. CHAT HEADER (Green Background) */
+.chat-header {
+  background-color: #20621E; /* EduGreen Color */
+  color: #ffffff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid #1a5218;
+}
+
+.chat-header span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#close-chat {
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+#close-chat:hover { opacity: 1; }
+
+/* 2. CHAT BODY (Message Area) */
+.chat-body {
+  flex: 1; /* Fills remaining space */
+  padding: 20px;
+  overflow-y: auto; /* Scrollable */
+  background-color: #f5f7f5; /* Very light green/grey tint */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Chat Bubbles */
+.bot-msg, .user-msg {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+  position: relative;
+}
+
+/* Bot Message (Left, Gray) */
+.bot-msg {
+  align-self: flex-start;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-bottom-left-radius: 2px; /* distinct shape */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* User Message (Right, Green) */
+.user-msg {
+  align-self: flex-end;
+  background-color: #20621E;
+  color: #ffffff;
+  border-bottom-right-radius: 2px; /* distinct shape */
+  box-shadow: 0 2px 8px rgba(32, 98, 30, 0.2);
+}
+
+/* 3. INPUT AREA (Bottom) */
+.chat-input-area {
+  padding: 15px;
+  background: #ffffff;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  background: #f9f9f9;
+}
+
+#chat-input:focus {
+  border-color: #20621E;
+  background: #fff;
+}
+
+#send-chat-btn {
+  background-color: #20621E;
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* Circle Button */
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+#send-chat-btn:hover {
+  background-color: #1a5218;
+  transform: scale(1.05);
+}
+
+/* Scrollbar styling for chat body */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1); 
+  border-radius: 4px;
+}
+
+/* Container for the video to make it responsive */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ensure the learn-section has some spacing */
+.learn-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+/* =========================================
+   CHECKOUT SUMMARY COLLAGE & TOGGLE
+   ========================================= */
+
+/* The Container Box (Fixed Size) */
+.summary-collage-container {
+    width: 100%;
+    height: 150px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    background: #f0f0f0;
+}
+
+/* Default single image style */
+.summary-collage-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* THE GRID SYSTEM */
+.collage-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 2px;
+}
+
+/* 2 Images: Split vertically */
+.collage-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 3 Images: 1 Big Left, 2 Small Right */
+.collage-grid.cols-3 {
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.collage-grid.cols-3 img:first-child {
+    grid-row: span 2; /* Takes up whole left side */
+    height: 100%;
+}
+
+/* 4 Images: 2x2 Box */
+.collage-grid.cols-4 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+/* TOGGLE BUTTON AREA */
+.summary-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: opacity 0.3s;
+}
+.summary-toggle-btn:hover {
+    opacity: 0.8;
+}
+.summary-toggle-btn p {
+    color: #20621E;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+#summary-toggle-icon {
+    color: #20621E;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* HIDDEN LIST */
+#summary-activities-list {
+    display: none; /* Hidden by default */
+    list-style: none;
+    padding: 10px;
+    background: #f8fcf8;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #555;
+    animation: fadeIn 0.3s ease;
+}
+#summary-activities-list li {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+#summary-activities-list li::before {
+    content: "•";
+    color: #20621E;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Style for the Download Link */
+.poster-link {
+  font-family: 'Poppins', sans-serif; /* Matches your site font */
+  font-size: 1.2rem;                  /* Slightly larger than normal text */
+  font-weight: 600;                   /* Semi-bold to stand out */
+  color: #1b5e20;                     /* Deep Forest Green (Base Color) */
+  text-decoration: underline;
+  text-underline-offset: 4px;         /* Puts space between text and line */
+  transition: all 0.3s ease;          /* smooth animation */
+}
+
+/* Hover Effect (When mouse is over it) */
+.poster-link:hover {
+  color: #e67e22;                     /* Striking Burnt Orange/Gold */
+  text-decoration-thickness: 3px;     /* Makes the line thicker */
+  letter-spacing: 0.5px;              /* Slight expansion effect */
+}
+
+/* =========================================
+   LINKS BUTTON SECTION (Uniform Size Fix)
+   ========================================= */
+.links {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+.highlight-link {
+  display: inline-flex;       /* Use Flexbox for perfect centering */
+  justify-content: center;    /* Center text horizontally */
+  align-items: center;        /* Center text vertically */
+  
+  width: 350px;               /* FIXED WIDTH: Forces both buttons to be this size */
+  height: 60px;               /* FIXED HEIGHT: Ensures uniform height */
+  
+  background-color: #20621E;
+  color: #ffffff;
+  margin: 10px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;            /* Ensure font size is consistent */
+  letter-spacing: 0.5px;
+  box-shadow: 0 5px 15px rgba(32, 98, 30, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.highlight-link:hover {
+  background-color: #2b8a3e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(32, 98, 30, 0.3);
+  color: #fff;
+}
+
+/* =========================================
+   USER PROFILE PAGE (Smart Minimalist)
+   ========================================= */
+body.user-page {
+    background-color: #fafafa; 
+    padding-top: 100px;
+    
+    /* --- FIX START: Sticky Footer Logic --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* --- FIX END --- */
+}
+
+/* Layout Grid */
+.user-container {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Fixed Sidebar + Fluid Content */
+    gap: 40px;
+    align-items: start;
+    flex: 1; 
+    width: 100%;
+}
+
+/* 1. Sidebar Card (Profile) - Clean & Floating */
+.profile-card {
+    background: #ffffff;
+    padding: 40px 20px;
+    border-radius: 24px; /* Super rounded modern look */
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04); /* Soft diffused shadow */
+    border: 1px solid rgba(0,0,0,0.03);
+    position: sticky;
+    top: 100px; /* Smart sticky effect */
+}
+
+.profile-img-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(32, 98, 30, 0.15); /* Green glow shadow */
+    border: 4px solid #fff; /* Clean white ring */
+}
+
+.profile-card h2 {
+    color: #111;
+    font-family: 'Poppins', sans-serif; /* Switched to Sans for modern feel */
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+.profile-card p {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.member-since {
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa !important;
+    margin-top: -15px;
+    margin-bottom: 30px !important;
+}
+
+/* Logout Button (Minimalist Pill) */
+.logout-btn {
+    background-color: #fff;
+    color: #d9534f;
+    border: 1px solid #fdebeb;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background-color: #d9534f;
+    color: white;
+    border-color: #d9534f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(217, 83, 79, 0.2);
+}
+
+/* 2. History Section (The Table) */
+.history-section {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #111;
+    margin-bottom: 30px;
+    border: none; /* Removed the underline */
+}
+
+/* Table Styles - "Fintech" Look */
+.history-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Spacing between rows */
+    margin-top: 0;
+}
+
+/* Header */
+.history-table th {
+    text-align: left;
+    padding: 15px;
+    color: #999; /* Light grey text */
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    background: transparent; /* Removed green background */
+    border-bottom: 1px solid #eee;
+}
+
+/* Body Rows */
+.history-table tbody tr {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #ffffff;
+}
+
+.history-table tbody tr:hover {
+    transform: scale(1.01); /* Micro-interaction lift */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    z-index: 10;
+    position: relative;
+    background: #fff;
+}
+
+.history-table td {
+    padding: 20px 15px;
+    color: #333;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f9f9f9;
+    vertical-align: middle;
+}
+
+/* Specific Columns Styling */
+/* Column 1: Index (Subtle) */
+.history-table td:first-child {
+    color: #bbb;
+    font-weight: 500;
+    border-radius: 12px 0 0 12px;
+}
+
+/* Column 2: Type (Bold) */
+.history-table td:nth-child(2) {
+    font-weight: 600;
+    color: #20621E;
+}
+
+/* Column 4: Pax (Pill Badge) */
+.history-table td:nth-child(4) {
+    color: #555;
+    font-weight: 600;
+}
+
+/* Column 5: Price (Big & Bold) */
+.history-table td:nth-child(5) {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #111;
+    font-size: 1rem;
+    border-radius: 0 12px 12px 0; /* Rounds the right side */
+}
+
+/* Responsive Mobile */
+@media (max-width: 800px) {
+    .user-container { grid-template-columns: 1fr; gap: 30px; }
+    .profile-card { position: relative; top: 0; }
+    .history-section { padding: 25px; }
+}
+
+/* =========================================
+   PACKAGE DETAILS STYLING (MATCHING PROGRAM CARD)
+   ========================================= */
+
+/* 1. Main Container Wrapper */
+#details-container {
+    background: #ffffff !important; /* Force white background */
+    padding: 30px 40px !important;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    color: #444; /* Dark grey text */
+    border: 1px solid #eee; /* Subtle border */
+}
+
+/* 2. Main Image */
+#detail-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* 3. Title (Green & Serif like 'Souvenir Workshop') */
+#detail-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 2.4rem !important;
+    font-weight: 700;
+    color: #20621E !important; /* Your theme Green */
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+/* 4. Meta Row (Type, Duration, Price) */
+#details-container > div[style*="display: flex"] {
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px !important;
+    font-size: 1.1rem;
+    color: #555;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Divider line below meta */
+}
+
+/* Style the Type Tag */
+#detail-type {
+    background-color: #e8f5e9 !important;
+    color: #20621E !important;
+    padding: 5px 12px !important;
+    border-radius: 6px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Add Clock Emoji before Duration */
+#detail-duration::before {
+    content: "⏰ ";
+    font-size: 1.1rem;
+    margin-right: 4px;
+}
+
+/* Style the Price */
+#detail-price {
+    font-weight: 700 !important;
+    color: #333 !important;
+    font-size: 1.2rem;
+    margin-left: auto; /* Pushes price to the far right */
+}
+
+/* 5. Section Headers (Description & Activities) */
+#details-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #20621E;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+/* 6. Paragraph Text */
+#detail-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* 7. Bullet List (Matching the Image Style) */
+#detail-activities {
+    list-style: none !important; /* Remove default bullets */
+    padding: 0 !important;
+    margin-bottom: 30px !important;
+}
+
+#detail-activities li {
+    position: relative;
+    padding-left: 25px; /* Space for bullet */
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Custom Grey Bullet Point */
+#detail-activities li::before {
+    content: "•";
+    color: #666; /* Grey bullet color */
+    font-weight: bold;
+    font-size: 1.4rem;
+    position: absolute;
+    left: 5px;
+    top: -4px; /* Align vertical center */
+}
+
+/* 8. Action Button (Green Full Width) */
+#detail-book-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #20621E !important;
+    color: white !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px; /* Slightly rounded corners */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(32, 98, 30, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#detail-book-btn:hover {
+    background-color: #1a5218 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(32, 98, 30, 0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    #details-container {
+        padding: 20px !important;
+    }
+    #detail-title {
+        font-size: 1.8rem !important;
+    }
+    #details-container > div[style*="display: flex"] {
+        flex-wrap: wrap; /* Stack items if screen is too small */
+    }
+    #detail-price {
+        margin-left: 0; /* Reset margin on mobile */
+        width: 100%; /* Make price take full width */
+    }
+}
+
+/* =========================================
+   MODERN MINIMALIST PROGRAM MODAL
+   ========================================= */
+
+/* 1. The Modal Background (Darker & Blurrier) */
+#program-details-modal.modal {
+    background-color: rgba(0, 0, 0, 0.6); /* Darker dim */
+    backdrop-filter: blur(5px); /* Modern blur effect behind the popup */
+    padding-top: 0; /* Reset default padding */
+    display: none; /* Hidden by default (toggled by JS) */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+/* Ensure flex centering works when display is set to block by JS */
+#program-details-modal[style*="display: block"] {
+    display: flex !important; 
+}
+
+/* 2. The Card Box (Minimalist & Small) */
+#program-details-modal .modal-content {
+    width: 90%;
+    max-width: 420px !important; /* Smaller, narrower card width */
+    background: #ffffff;
+    border-radius: 20px; /* Smooth, modern rounded corners */
+    padding: 0 !important; /* Remove default padding so image hits edges */
+    border: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Soft, deep shadow */
+    overflow: hidden; /* Clips the image at the corners */
+    position: relative;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy pop-in */
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 3. The Image (Full Width Top) */
+#prog-modal-img {
+    width: 100%;
+    height: 220px !important; /* Fixed height for consistency */
+    object-fit: cover;
+    display: block;
+    margin: 0;
+}
+
+/* 4. The Close Button (Floating Circle) */
+#close-prog-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    z-index: 10;
+}
+
+#close-prog-modal:hover {
+    background: #fff;
+    transform: scale(1.1);
+    color: #d9534f;
+}
+
+/* 5. Typography & Spacing (Clean Layout) */
+/* Title */
+#prog-modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #20621E !important;
+    margin: 20px 25px 5px 25px; /* Spacing around text */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Time & Price Row */
+#program-details-modal .modal-content > div[style*="display: flex"] {
+    padding: 0 25px 15px 25px;
+    margin: 0 !important;
+    font-size: 0.95rem;
+    color: #666;
+    border-bottom: 1px solid #f0f0f0; /* Subtle divider */
+}
+
+#prog-modal-time::before {
+    content: "⏰ ";
+}
+
+#prog-modal-price {
+    color: #333;
+    font-weight: 700;
+    margin-left: auto; /* Push to right */
+    background: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #20621E;
+    font-size: 0.9rem;
+}
+
+/* 6. Description (Clean Text) */
+#prog-modal-desc {
+    padding: 20px 25px;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    max-height: 300px; /* Prevent it from getting too tall */
+    overflow-y: auto; /* Scroll if text is huge */
+}
+
+/* Bullet Points in Description (If using the JS fix provided earlier) */
+#prog-modal-desc ul {
+    padding-left: 0;
+    margin: 0;
+}
+
+#prog-modal-desc li {
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+#prog-modal-desc li::before {
+    content: "•";
+    color: #20621E;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* 7. Action Button (Bottom "Pill") */
+#prog-modal-action-btn {
+    display: block;
+    width: calc(100% - 50px) !important; /* Full width minus padding */
+    margin: 0 25px 25px 25px !important; /* Spacing from bottom/sides */
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px; /* Pill shape */
+    background-color: #20621E !important;
+    box-shadow: 0 4px 12px rgba(32, 98, 30, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+#prog-modal-action-btn:hover {
+    background-color: #1a5218 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(32, 98, 30, 0.35);
+}
+
+/* =========================================
+   FIX FOR DOUBLE BULLETS IN MODAL
+   ========================================= */
+
+/* 1. Force remove the default black/grey dot */
+#prog-modal-desc ul, 
+#prog-modal-desc li {
+    list-style: none !important; /* Overrides the inline JS style */
+    list-style-type: none !important;
+}
+
+/* 2. Ensure the list text aligns correctly with the custom bullet */
+#prog-modal-desc li {
+    position: relative;
+    padding-left: 20px; /* Make space for the green bullet */
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* 3. Style the Custom Green Bullet */
+#prog-modal-desc li::before {
+    content: "•";          /* The bullet character */
+    color: #20621E;        /* Your theme green */
+    font-weight: bold;
+    font-size: 1.2rem;     /* Slightly larger dot */
+    position: absolute;    /* Fix position to the left */
+    left: 0;
+    top: -2px;             /* Align vertically */
+}
+
+/* =========================================
+   HOME: FEATURED PACKAGES (Minimalist)
+   ========================================= */
+.featured-section {
+    padding: 60px 20px;
+    background-color: #f9fdf9; /* Very light green tint */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #20621E;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* GRID LAYOUT */
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+/* CARD STYLE */
+.feat-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.feat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.feat-img-box {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.feat-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.feat-card:hover .feat-img-box img {
+    transform: scale(1.05); /* Zoom effect on hover */
+}
+
+.feat-price-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    color: #20621E;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.feat-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.feat-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feat-meta {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Minimalist Button */
+.feat-btn {
+    margin-top: auto; /* Pushes button to bottom */
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #20621E;
+    color: #20621E;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.feat-btn:hover {
+    background-color: #20621E;
+    color: #fff;
+}
+
+/* 'View All' Link */
+.view-all-btn {
+    display: inline-block;
+    color: #20621E;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid #20621E;
+    padding-bottom: 2px;
+    transition: all 0.3s;
+}
+.view-all-btn:hover {
+    color: #1a4a18;
+    border-color: transparent;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Package Details - EduGreenTourism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="details-page">
+
+   <nav class="navbar">
+    <div class="logo"> <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism</div>
+    <ul class="nav-links">
+      <li><a href="index.html">About Green Tourism</a></li>
+      <li><a href="discover.html">Discover Eco-Attractions</a></li>
+      <li><a href="learn.html">Learn More</a></li>
+      <li><a href="itinerary.html">Itinerary</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button id="signupBtn">Sign Up</button>
+      <button id="loginBtn">Login</button>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </nav>
+
+    <div class="container" style="max-width: 900px; margin: 120px auto; padding: 20px;">
+        <button onclick="window.location.href='itinerary.html'" style="padding: 10px 20px; cursor: pointer; margin-bottom: 20px; border:none; background:#ddd; border-radius:5px;">&larr; Back to List</button>
+        
+        <div id="loading-details">Loading details from database...</div>
+        
+        <div id="details-container" style="display: none;">
+            <img id="detail-img" src="" alt="Package Image" style="width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+            
+            <h1 id="detail-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #20621E;"></h1>
+            
+            <div style="display: flex; gap: 20px; margin: 15px 0; color: #555;">
+                <span id="detail-type" style="background: #e8f5e9; color: #20621E; padding: 5px 10px; border-radius: 5px; font-weight: bold;"></span>
+                <span id="detail-duration"></span>
+                <span id="detail-price" style="font-weight: bold; color: #333;"></span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+            <h3>Description</h3>
+            <p id="detail-desc" style="line-height: 1.8; color: #444; margin-bottom: 20px;"></p>
+
+            <h3>Included Activities</h3>
+            <ul id="detail-activities" style="margin-bottom: 30px; padding-left: 20px; line-height: 1.8;"></ul>
+
+            <div id="detail-actions">
+                <button id="detail-book-btn" class="book-slot-btn" style="width: 100%; padding: 15px; font-size: 1.1rem;">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="package-sticky-bar">
+        <div class="sticky-content">
+            <div class="sticky-info">
+                <span id="pkg-sticky-name" style="font-weight:600; font-size: 1.1rem;">Package Name</span>
+                <div style="font-size: 0.9rem; color: #555; margin-top: 4px;">
+                    Total: <span id="pkg-sticky-total" class="sticky-total">RM 0.00</span>
+                </div>
+            </div>
+
+            <div class="sticky-controls">
+                
+                <div class="pax-selector">
+                    <label style="font-size: 0.8rem; font-weight: bold; color: #555; display:block; margin-bottom:2px;">Pax:</label>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button type="button" id="pkg-pax-minus" class="pax-btn">-</button>
+                        <span id="pkg-pax-display" style="min-width: 40px; text-align: center; font-weight: bold; color: #333;">1</span>
+                        <button type="button" id="pkg-pax-plus" class="pax-btn">+</button>
+                    </div>
+                </div>
+
+                <button id="pkg-sticky-checkout-btn" class="btn-sticky-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="package-sticky-bar">
+    <div class="sticky-content">
+        <div class="sticky-info">
+            <span id="pkg-sticky-name" style="font-weight:600; font-size: 1.1rem;">Package Name</span>
+            <div style="font-size: 0.9rem; color: #555; margin-top: 4px;">
+                Total: <span id="pkg-sticky-total" class="sticky-total">RM 0.00</span>
+            </div>
+        </div>
+
+        <div class="sticky-controls">
+            
+            <div class="pax-selector">
+                <label>Pax:</label>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <button type="button" id="pkg-pax-minus" class="pax-btn">-</button>
+                    <span id="pkg-pax-display" style="min-width: 40px; text-align: center; font-weight: bold; color: #333;">1</span>
+                    <button type="button" id="pkg-pax-plus" class="pax-btn">+</button>
+                </div>
+            </div>
+
+            <div class="date-group-row">
+                <div class="date-input-small">
+                    <label>Arrival:</label>
+                    <input type="date" id="pkg-arrival-input">
+                </div>
+                <div class="date-input-small">
+                    <label>Departure:</label>
+                    <input type="date" id="pkg-depart-input">
+                </div>
+            </div>
+
+            <button id="pkg-sticky-checkout-btn" class="btn-sticky-checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

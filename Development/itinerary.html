@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Itinerary - EduGreenTourism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="itinerary-page">
+    <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html" class="active">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: none;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: none;">Log Out</button>
+    </div>
+</nav>
+
+    <section class="itinerary-content">
+        <div class="itinerary-header">
+            <h1>Plan Your Eco-Trip</h1>
+            <p>Explore our programs below. Enter your dates to check availability and book.</p>
+        </div>
+
+        <div class="booking-selector">
+            <h2>Check Availability</h2>
+            <div class="selection-controls">
+                <div class="input-group">
+                    <label>Arrival Date</label>
+                    <input type="date" id="arrival-date">
+                </div>
+                <div class="input-group">
+                    <label>Departure Date</label>
+                    <input type="date" id="departure-date">
+                </div>
+                <button id="check-availability-btn" class="check-btn">Check Availability</button>
+            </div>
+            <p id="error-message" class="error-message" style="display:none;"></p>
+        </div>
+
+        <div id="packages-result-section" style="margin-top: 40px;">
+            <h2 id="search-info-display" class="search-info-display">All Our Packages</h2>
+            <p id="loading-message" class="loading-message">Loading packages...</p>
+            <div id="available-packages-list" class="available-packages-list"></div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="custom-package-section" id="custom-package-section">
+            <div class="custom-header">
+                <h2>Build Your Own Adventure</h2>
+                <p>Select the activities you love to create a personalized itinerary.</p>
+            </div>
+            <div class="custom-builder-container">
+                <div id="custom-programs-loading" style="text-align: center; padding: 20px;">Loading activities...</div>
+                <div id="custom-activities-list" class="custom-activities-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="custom-sticky-bar">
+        <div class="sticky-content">
+            <div class="sticky-info">
+                <span id="sticky-count">0 Activities</span>
+                <div style="font-size: 0.9rem;">Total: <span id="sticky-total">RM 0.00</span></div>
+            </div>
+
+            <div class="sticky-controls">
+                
+                <div class="pax-selector">
+                    <label>Pax</label>
+                    <div class="pax-controls-row">
+                        <button type="button" id="pax-minus" class="pax-btn">-</button>
+                        <span id="pax-display">1</span>
+                        <button type="button" id="pax-plus" class="pax-btn">+</button>
+                    </div>
+                </div>
+
+                <div class="sticky-date-container">
+                    <input type="date" id="sticky-date-input" title="Select Date">
+                </div>
+
+                <button id="sticky-checkout-btn" class="btn-sticky-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="package-sticky-bar">
+        <div class="sticky-content">
+            <div class="sticky-info">
+                <span id="pkg-sticky-name">Package Name</span>
+                <div style="font-size: 0.9rem;">Total: <span id="pkg-sticky-total">RM 0.00</span></div>
+            </div>
+
+            <div class="sticky-controls">
+                
+                <div class="pax-selector">
+                    <label>Pax</label>
+                    <div class="pax-controls-row">
+                        <button type="button" id="pkg-pax-minus" class="pax-btn">-</button>
+                        <span id="pkg-pax-display">1</span>
+                        <button type="button" id="pkg-pax-plus" class="pax-btn">+</button>
+                    </div>
+                </div>
+
+                <div class="sticky-date-container">
+                    <input type="date" id="pkg-arrival-input" title="Arrival Date">
+                    <input type="date" id="pkg-depart-input" title="Departure Date">
+                </div>
+
+                <button id="pkg-sticky-checkout-btn" class="btn-sticky-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="program-details-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-btn" id="close-prog-modal">&times;</span>
+            <img id="prog-modal-img" src="" style="width:100%; height:250px; object-fit:cover;">
+            <h2 id="prog-modal-title" style="color: #20621E;"></h2>
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <span id="prog-modal-time"></span>
+                <span id="prog-modal-price" style="font-weight: bold;"></span>
+            </div>
+            <p id="prog-modal-desc"></p>
+            <button id="prog-modal-action-btn" class="book-slot-btn" style="width:100%; margin-top:15px;">Close</button>
+        </div>
+    </div>
+
+     <div id="chat-widget" class="chat-widget">
+  <div class="chat-header">
+    <span>🤖 EduGreen AI Assistant</span>
+    <span id="close-chat" style="cursor:pointer;">&times;</span>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type your question..." />
+    <button id="send-chat-btn">➤</button>
+  </div>
+</div>
+    
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+    <script src="script.js"></script>
+</body>
+</html>

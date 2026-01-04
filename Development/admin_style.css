@@ -1,0 +1,779 @@
+/* =========================================
+   1. GLOBAL RESET & FONTS
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9; /* Light grey background */
+    color: #333;
+    height: 100vh;
+    overflow: hidden; /* Prevents double scrollbars on body */
+}
+
+/* =========================================
+   2. MAIN LAYOUT (Sidebar + Content)
+   ========================================= */
+.admin-container {
+    display: flex; /* This fixes the Sidebar alignment */
+    height: 100vh;
+    width: 100%;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Prevents shrinking */
+    z-index: 100;
+}
+
+.sidebar .logo {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar .logo h2 {
+    color: #2ecc71;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: #b8c7ce;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar nav ul li a:hover, 
+.sidebar nav ul li a.active {
+    background-color: #34495e;
+    color: #fff;
+    border-left-color: #2ecc71;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1; /* Takes remaining width */
+    padding: 30px;
+    overflow-y: auto; /* Scroll ONLY the content area */
+    background-color: #f4f6f9;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* =========================================
+   3. DASHBOARD WIDGETS (Restored)
+   ========================================= */
+/* Stats Grid (The 4 Boxes) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    border-top: 4px solid #2ecc71;
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Recent Bookings Table Wrapper */
+.recent-bookings {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.recent-bookings h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+/* =========================================
+   4. TABLES & BADGES
+   ========================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+table th {
+    background-color: #f8f9fa;
+    color: #555;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+table tr:hover {
+    background-color: #f1f2f6;
+}
+
+/* Status Badges */
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.status.confirmed, .status.paid { background-color: #e8f8f5; color: #2ecc71; }
+.status.pending, .status.pending.payment { background-color: #fef9e7; color: #f1c40f; }
+.status.cancelled { background-color: #fceae9; color: #e74c3c; }
+
+/* Visibility Badges */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.visible { background: #d4edda; color: #155724; }
+.hidden { background: #f8d7da; color: #721c24; }
+
+/* Image Previews */
+.table-img-preview {
+    width: 80px; 
+    height: 60px; 
+    object-fit: cover; 
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* =========================================
+   5. SPLIT-VIEW LAYOUT (For Users & Pages)
+   ========================================= */
+/* This handles the "List on Left, Form on Right" layout */
+.admin-row {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap; 
+    align-items: flex-start;
+}
+
+.col-list {
+    flex: 2; /* List takes 66% width */
+    min-width: 400px;
+}
+
+.col-form {
+    flex: 1; /* Form takes 33% width */
+    min-width: 300px;
+    position: sticky;
+    top: 0;
+}
+
+/* Generic Admin Card Container */
+.admin-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    border-top: 3px solid #2ecc71; 
+}
+
+.admin-card h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+
+/* =========================================
+   6. FORMS
+   ========================================= */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],     /* Added */
+input[type="password"],  /* Added */
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fafafa;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #2ecc71;
+    outline: none;
+    background-color: #fff;
+}
+
+/* =========================================
+   7. BUTTONS (MODERNIZED)
+   ========================================= */
+
+/* --- 1. Main Green Submit Button --- */
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
+}
+
+/* --- 2. Modern Action Icons (Edit, Delete, View) --- */
+.btn-edit, 
+.btn-delete, 
+.btn-toggle, 
+.btn-view {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;       /* Slightly bigger for modern look */
+    height: 38px;
+    border-radius: 8px; /* Soft rounded corners */
+    color: white;
+    text-decoration: none;
+    margin-right: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover effect */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Gradients for depth */
+.btn-edit { 
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); /* Orange */
+}
+.btn-delete { 
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); /* Red */
+}
+.btn-toggle, .btn-view {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); /* Blue */
+}
+
+/* Hover Effects (Lift up) */
+.btn-edit:hover, 
+.btn-delete:hover, 
+.btn-toggle:hover, 
+.btn-view:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    opacity: 1; /* Ensures no transparency issues */
+}
+
+/* Active Click Effect (Push down) */
+.btn-edit:active, 
+.btn-delete:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- 3. Cancel Button (Grey) --- */
+.cancel-link {
+    display: block;
+    width: 100%;             /* Full width to match the submit button */
+    text-align: center;
+    margin-top: 10px;
+    padding: 12px;           /* Same padding as btn-submit */
+    background-color: #95a5a6; /* Neutral Grey */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;      /* Rounded corners */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cancel-link:hover {
+    background-color: #7f8c8d; /* Darker grey on hover */
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* =========================================
+   8. PAGE MANAGER TABS (Restored)
+   ========================================= */
+.page-tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    background: white;
+    padding: 10px 20px 0 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-link {
+    padding: 12px 25px;
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+    margin-right: 5px;
+}
+
+.tab-link:hover {
+    background: #f8f9fa;
+    color: #28a745;
+}
+
+.tab-link.active {
+    border-bottom: 3px solid #28a745;
+    color: #28a745;
+    background: #eef9f0;
+}
+
+.editor-section {
+    background: white;
+    padding: 25px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   9. MISC & ALERTS
+   ========================================= */
+.alert {
+    padding: 12px;
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 5px solid #28a745;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px dashed #ecf0f1;
+}
+
+.delete-badge {
+    background-color: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- Fix Input Widths for User Form --- */
+/* Ensures Email and Password fields are as wide as the Username field */
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* --- Fix Edit/Delete Buttons Layout --- */
+/* Forces the buttons to stay on the same line */
+table td:last-child {
+    white-space: nowrap;
+    min-width: 90px; /* Gives enough space for two buttons */
+}
+
+/* Optional: Add spacing between the two buttons */
+.btn-edit {
+    margin-right: 5px;
+}
+
+/* --- Booking Table Scroll --- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Adds scrollbar if table is too wide */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+.status-badge.pending { background: #fff3cd; color: #856404; }
+.status-badge.confirmed { background: #d4edda; color: #155724; }
+.status-badge.paid { background: #cce5ff; color: #004085; }
+.status-badge.cancelled { background: #f8d7da; color: #721c24; }
+
+/* --- Two Columns in Form (Half Width) --- */
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+.form-group.half {
+    flex: 1;
+}
+
+/* --- Booking Details Badges --- */
+.badge-pkg {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.badge-custom {
+    background-color: #f3e5f5;
+    color: #4a148c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.text-muted {
+    color: #6c757d;
+    font-size: 0.85em;
+}
+
+/* Placeholder card style */
+.placeholder-card {
+    text-align: center; 
+    padding: 50px 20px; 
+    color: #bbb;
+    border: 2px dashed #ddd;
+}
+.placeholder-card i {
+    font-size: 40px; 
+    margin-bottom: 15px;
+}
+.highlight-border {
+    border-top: 4px solid #f39c12;
+}
+
+/* --- Checkbox List (Activities) --- */
+.checkbox-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    background: #fafafa;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.checkbox-item input {
+    width: auto !important; /* Override standard full width */
+    margin-right: 10px;
+}
+
+/* --- Dynamic Dates Section --- */
+.btn-sm-add {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+.date-row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.date-row input {
+    flex: 1;
+}
+
+.btn-remove {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    width: 38px; /* Matches input height approx */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Bulk Date Tool Styling --- */
+.bulk-date-tool {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px;
+}
+
+.btn-bulk-add {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-bulk-add:hover { background: #2980b9; }
+
+.btn-add-single {
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px dashed #ccc;
+    padding: 8px;
+    color: #555;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.btn-add-single:hover { background: #e2e6ea; }
+
+#dates-wrapper {
+    max-height: 200px;
+    overflow-y: auto; /* Scrollable list if many dates added */
+    border: 1px solid #eee;
+    padding: 5px;
+    background: #fff;
+}
+
+/* =========================================
+   HERO SLIDE BUTTON STYLES
+   ========================================= */
+
+.form-actions {
+    display: flex;
+    gap: 15px; 
+    margin-top: 20px;
+    justify-content: center; /* This centers the buttons */
+}
+
+/* Shared style for both buttons */
+.btn-action {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    
+    /* ADD THIS LINE BELOW to fix the spacing */
+    gap: 10px; 
+}
+
+/* Green "Update" Button */
+.btn-update {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+/* Grey "Cancel" Button */
+.btn-cancel-edit {
+    background-color: #95a5a6; /* Neutral Grey */
+    color: white;
+}
+
+.btn-cancel-edit:hover {
+    background-color: #7f8c8d;
+    background-color: #e74c3c; /* Turns red on hover */
+}
+
+/* =========================================
+   MESSAGE VIEW & MODAL STYLES
+   ========================================= */
+
+/* Blue View Button */
+.btn-view {
+    background-color: #3498db; /* Blue */
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.btn-view:hover {
+    background-color: #2980b9;
+}
+
+/* Modal Overlay (Background) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+/* Modal Box */
+.modal-box {
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Modal Header */
+.modal-header {
+    background: #2c3e50;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-modal {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ccc;
+}
+.close-modal:hover { color: #fff; }
+
+/* Modal Body */
+.modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto; /* Scroll if message is super long */
+}
+
+.sender-info {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.full-message {
+    white-space: pre-wrap; /* Preserves line breaks from user input */
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    text-align: right;
+    border-top: 1px solid #eee;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

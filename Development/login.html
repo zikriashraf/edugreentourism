@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduGreenTourism - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Reset and Body setup to match signup page background */
+    body.login-page {
+      font-family: 'Poppins', sans-serif; /* Matches signup font */
+      background-color: #f0f4f8; /* Matches signup light gray background */
+      margin: 0;
+      padding-top: 90px; /* Space for navbar */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Center the card vertically and horizontally */
+    .login-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center; /* This centers the card vertically */
+      padding: 20px;
+    }
+
+    /* The White Card Container */
+    .login-section .container {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px; /* Matches signup rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Matches signup shadow */
+      width: 100%;
+      max-width: 400px; /* Matches signup width */
+      text-align: center;
+    }
+
+    /* Header "Login" */
+    .login-section h2 {
+      font-family: 'Playfair Display', serif; /* Matches signup header font */
+      font-size: 28px;
+      color: #20621E; /* Matches signup green title color */
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    /* Input Fields */
+    .login-section input[type="text"],
+    .login-section input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 6px; /* Slightly rounded inputs */
+      font-size: 15px;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box; /* Ensures padding doesn't break width */
+    }
+
+    .login-section input::placeholder {
+      color: #888;
+    }
+
+    /* Login Button */
+    .login-section button {
+      width: 100%;
+      padding: 12px;
+      background-color: #20621E; /* Matches signup green button */
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .login-section button:hover {
+      background-color: #1a4f18; /* Slightly darker green on hover */
+    }
+
+    /* Footer Text */
+    .login-section .form-footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .login-section .form-footer a {
+      color: #20621E;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-section .form-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body class="login-page">
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">About Green Tourism</a></li>
+      <li><a href="discover.html">Discover Eco-Attraction</a></li>
+      <li><a href="learn.html">Learn More</a></li>
+      <li><a href="itinerary.html">Itinerary</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button id="signupBtn">Sign Up</button>
+      <button id="loginBtn">Login</button>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </nav>
+
+  <section class="login-section">
+    <div class="container">
+      <h2>
+  <a href="adminlogin.html" style="text-decoration: none; color: inherit; cursor: pointer;">
+    Login
+  </a>
+</h2>
+      <form id="loginForm" action="login.php" method="POST">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit" name="login">Login</button>
+      </form>
+      <div class="form-footer">
+        Don't have an account? <a href="signup.html">Sign Up</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+  <script src="script.js?v=2"></script>
+</body>
+</html>

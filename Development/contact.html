@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | EduGreenTourism</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="contact-page">
+
+  <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html" class="active">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: none;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: none;">Log Out</button>
+    </div>
+</nav>
+
+  <header class="contact-header fade-in">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Reach out for questions, visit planning or partnership.</p>
+  </header>
+
+  <section class="contact-section fade-in">
+    <div class="contact-container">
+
+      <aside class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>Have questions about green tourism in Tanjung Malim? Contact us directly or leave a message.</p>
+
+        <div class="info-box">
+          <div class="info-left">
+            <strong>Email</strong>
+            <a id="emailLink" href="#">Loading email...</a>
+          </div>
+          <div class="info-right">
+            <button class="copy-btn" data-copy="">Copy</button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-left">
+            <strong>Phone</strong>
+            <a id="phoneLink" href="#">Loading phone...</a>
+          </div>
+          <div class="info-right">
+            <button class="copy-btn" data-copy="">Copy</button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-left">
+            <strong>Address</strong>
+            <address id="addressText">Loading address...</address>
+          </div>
+          <div class="info-right">
+            <button class="copy-btn" data-copy="">
+              Copy
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <form id="messageForm" class="contact-form" novalidate>
+        <h2>Send Us a Message</h2>
+
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="text" id="subject" placeholder="Subject" required>
+
+        <textarea id="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit" id="sendBtn">Send Message</button>
+
+        <p id="successMessage" class="success-text" aria-live="polite"></p>
+      </form>
+
+    </div>
+  </section>
+
+  <div class="map-wrap">
+    <iframe
+      id="mapFrame"
+      title="Tanjung Malim Map"
+      src="https://maps.google.com/maps?q=Universiti%20Pendidikan%20Sultan%20Idris&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div id="chat-widget" class="chat-widget">
+  <div class="chat-header">
+    <span>🤖 EduGreen AI Assistant</span>
+    <span id="close-chat" style="cursor:pointer;">&times;</span>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type your question..." />
+    <button id="send-chat-btn">➤</button>
+  </div>
+</div>
+
+<footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | EduGreenTourism</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/png" href="img/icon.png">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="user-page">
+
+  <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" style="display:none;">Sign Up</button>
+        <button id="loginBtn" style="display:none;">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: flex;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: block;">Log Out</button>
+    </div>
+  </nav> <div class="user-container">
+    <aside class="profile-card">
+        <div class="profile-img-container">
+            <img src="img/user.png" alt="User Profile" id="profile-img">
+        </div>
+        <h2 id="user-name">Loading...</h2>
+        <p id="user-email">...</p>
+        <p class="member-since">Joined: <span id="user-joined">-</span></p>
+        
+        <button id="logoutBtnSide" class="logout-btn" onclick="document.getElementById('logoutBtn').click()">Log Out</button>
+    </aside>
+
+    <main class="history-section">
+        <h2 class="section-title">My Booking History</h2>
+        
+        <div class="table-responsive">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>#</th> 
+                        <th>Experience</th>
+                        <th>Date</th>
+                        <th>Guests</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-history-body">
+                    <tr><td colspan="5" style="text-align:center;">Loading history...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main> 
+  </div> 
+
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+
+  <div id="chat-widget" class="chat-widget">
+    <div class="chat-header">
+      <span>🤖 EduGreen AI Assistant</span>
+      <span id="close-chat" style="cursor:pointer;">&times;</span>
+    </div>
+    <div class="chat-body" id="chat-messages">
+      <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type your question..." />
+      <button id="send-chat-btn">➤</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

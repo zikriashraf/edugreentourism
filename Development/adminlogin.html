@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduGreenTourism - Admin Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Menggunakan gaya yang sama seperti login page biasa */
+    body.login-page {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding-top: 90px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-section .container {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      /* Tambahan: Sedikit border merah/berbeza untuk admin supaya user tahu ini admin page (optional) */
+      border-top: 5px solid #20621E; 
+    }
+
+    .login-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #20621E;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .login-section input[type="text"],
+    .login-section input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .login-section input::placeholder {
+      color: #888;
+    }
+
+    .login-section button {
+      width: 100%;
+      padding: 12px;
+      background-color: #20621E;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .login-section button:hover {
+      background-color: #1a4f18;
+    }
+
+    .login-section .form-footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .login-section .form-footer a {
+      color: #20621E;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-section .form-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body class="login-page">
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">About Green Tourism</a></li>
+      <li><a href="discover.html">Discover Eco-Attraction</a></li>
+      <li><a href="learn.html">Learn More</a></li>
+      <li><a href="itinerary.html">Itinerary</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button id="signupBtn">Sign Up</button>
+      <button id="loginBtn">Login</button>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </nav>
+
+  <section class="login-section">
+    <div class="container">
+      <h2>Admin Portal</h2>
+      
+      <form id="adminLoginForm" action="admin_login.php" method="POST">
+        <input type="text" name="admin_username" placeholder="Username or Email" required />
+        <input type="password" name="admin_password" placeholder="Admin Password" required />
+        <button type="submit" name="admin_login">Login as Admin</button>
+      </form>
+
+      <div class="form-footer">
+        Not an admin? <a href="login.html">Back to User Login</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+  <script src="script.js?v=2"></script>
+</body>
+</html>

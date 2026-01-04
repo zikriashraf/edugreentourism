@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduGreenTourism</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS & JS -->
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="script.js"></script> -->
+</head>
+
+<body class="home-page">
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html" class="active">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: none;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: none;">Log Out</button>
+    </div>
+</nav>
+
+  <section class="hero"> 
+    <div class="hero-slider">
+      </div>
+
+    <button class="hero-btn prev">❮</button>
+    <button class="hero-btn next">❯</button>
+  </section>
+
+  <section class="partner-banner">
+    <div class="banner-content">
+    <h3>Your journey into nature is powered by our partnership with Universiti Pendidikan Sultan Idris (UPSI) and Majlis Daerah Tanjung Malim (MDTM).</h3>
+  </div>
+</section>
+
+<section class="explore-deeper fade-in">
+  <div class="explore-box">
+    <h2>Loading...</h2>
+    <p></p>
+  </div>
+</section>
+
+   <div class="links">
+        <a href="discover.html" class="highlight-link">Highlight of Local Attractions</a><br>
+        <a href="itinerary.html" class="highlight-link">Suggested Programs</a>
+      </div>
+    </div>
+
+<section class="main-dashboard fade-in">
+    <div class="stats-container">
+      <div class="stat-box">
+        <h2 id="main-participants">0</h2>
+        <p>Total Participants</p>
+      </div>
+      <div class="stat-box">
+        <h2 id="main-donation">RM 0.00</h2>
+        <p>Total Donation Collected</p>
+      </div>
+      <div class="stat-box">
+        <h2 id="main-vendors">0</h2>
+        <p>Local Farmers & Vendors Involved</p>
+      </div>
+    </div>
+
+    </section>
+
+<section class="featured-section">
+    <div class="section-header">
+        <h2>Top Eco-Adventures</h2>
+        <p>Our most popular sustainable getaways selected for you.</p>
+    </div>
+
+    <div id="featured-packages-grid" class="featured-grid">
+        <div class="loading-spinner">Loading highlights...</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="itinerary.html" class="view-all-btn">View All Packages &rarr;</a>
+    </div>
+</section>
+
+ <div class="image-gallery" id="dynamic-gallery"></div>
+ 
+  <!-- Analytical Dashboard Section -->
+<section class="dashboard fade-in">
+    <div class="dashboard-header">
+      <h2>Analytics Dashboard</h2>
+      <p>Live Data</p>
+    </div>
+
+    <div class="dashboard-stats" id="dynamic-stats">
+        <p>Loading stats...</p> 
+    </div>
+
+    <div class="visitors" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <h3 style="margin-bottom: 20px;">Number of Visitors (2025)</h3>
+      <div style="position: relative; height: 300px; width: 100%;">
+       <canvas id="visitorsChart"></canvas>
+      </div>
+    </div>
+
+    <div class="feedback-section">
+      <div class="feedback" id="dynamic-feedback">
+        <h3>Rating & Feedback</h3>
+        <p>Loading feedback...</p>
+      </div>
+
+      <div class="popular">
+        <h3>Most Popular Green Tourism Activities</h3>
+        <ol id="dynamic-activities">
+          </ol>
+
+        <h3>Top Eco-Destinations in Tanjung Malim</h3>
+        <ol id="dynamic-destinations">
+          </ol>
+      </div>
+    </div>
+  </section>
+
+  <div id="chat-widget" class="chat-widget">
+  <div class="chat-header">
+    <span>🤖 EduGreen AI Assistant</span>
+    <span id="close-chat" style="cursor:pointer;">&times;</span>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type your question..." />
+    <button id="send-chat-btn">➤</button>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+<script src="script.js"></script>
+</body>
+</html>

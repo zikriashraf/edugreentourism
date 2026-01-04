@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduGreenTourism | Learn More</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html" class="active">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: none;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: none;">Log Out</button>
+    </div>
+</nav>
+
+  <div id="learn-content-container">
+      <div style="text-align:center; padding:50px;">Loading content...</div>
+  </div>
+
+  <div class="download-section" style="text-align: center; padding: 40px 20px;">
+  <p style="font-family: 'Poppins', sans-serif; margin-bottom: 10px;">
+    Ready to explore responsibly?
+  </p>
+  
+  <a href="img/EduGreenTourism Poster.pdf" download="EduGreenTourism_Poster.pdf" class="poster-link">
+    Download our Green Tourism Poster here
+  </a>
+</div>
+
+  <div id="chat-widget" class="chat-widget">
+  <div class="chat-header">
+    <span>🤖 EduGreen AI Assistant</span>
+    <span id="close-chat" style="cursor:pointer;">&times;</span>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type your question..." />
+    <button id="send-chat-btn">➤</button>
+  </div>
+</div>
+  <footer>
+    <p>© 2025 EduGreenTourism | Promoting Sustainable Travel</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

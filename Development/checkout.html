@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - EduGreenTourism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+   <nav class="navbar">
+    <div class="logo"> 
+        <img src="img/icon.png" alt="Logo" class="logo-icon" />EduGreenTourism
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">About Green Tourism</a></li>
+        <li><a href="discover.html">Discover Eco-Attractions</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="itinerary.html" class="active">Itinerary</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button id="aiChatBtn" style="background-color: #f1c40f; color: #333; margin-right: 5px;">
+            <i class="fas fa-robot"></i> AI Chat
+        </button>
+        
+        <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        
+        <a href="user.html" class="nav-user-link" style="display: none;">
+            <img src="img/user.png" alt="Profile" class="nav-user-icon">
+        </a>
+
+        <button id="logoutBtn" style="display: none;">Log Out</button>
+    </div>
+</nav>
+
+    <div class="checkout-container" id="checkout-content">
+        
+        <div class="checkout-form">
+            
+            <div class="checkout-section" style="margin-bottom: 30px;">
+                <h2 class="section-title">1. Details Information</h2>
+                
+                <label style="font-weight:600; display:block; margin-bottom:8px;">Full Name</label>
+                <input type="text" id="checkout-name" placeholder="e.g. Ali Bin Abu" 
+                       style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px;">
+
+                <label style="font-weight:600; display:block; margin-bottom:8px;">Phone Number</label>
+                <input type="tel" id="checkout-phone" placeholder="e.g. +60123456789" 
+                       style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px;">
+
+                <label style="font-weight:600; display:block; margin-bottom:8px;">Email Address</label>
+                <input type="email" id="checkout-email" placeholder="e.g. ali@example.com" 
+                       style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                <p style="font-size:0.85rem; color:#666; margin-top:5px;">Your booking receipt will be sent here.</p>
+            </div>
+
+            <div class="checkout-section">
+                <h2 class="section-title">2. Payment Method</h2>
+                
+                <label class="payment-option-label" style="display:flex; align-items:center; padding:15px; border:1px solid #ddd; border-radius:8px; margin-bottom:10px; cursor:pointer;">
+                    <input type="radio" name="payment-method" value="ToyyibPay" checked style="margin-right:15px; transform:scale(1.2);">
+                    <img src="https://placehold.co/40x20/e05b63/ffffff?text=FPX" style="margin-right:15px; border-radius:3px;">
+                    <div>
+                        <strong style="font-size:1rem; color:#333;">ToyyibPay (Online Banking)</strong><br>
+                        <small style="color:#666;">Maybank2u, CIMB Clicks, RHB, etc.</small>
+                    </div>
+                </label>
+
+                <label class="payment-option-label" style="display:flex; align-items:center; padding:15px; border:1px solid #ddd; border-radius:8px; margin-bottom:20px; cursor:pointer;">
+                    <input type="radio" name="payment-method" value="Cash" style="margin-right:15px; transform:scale(1.2);">
+                    <img src="https://placehold.co/40x20/2b8a3e/ffffff?text=Cash" style="margin-right:15px; border-radius:3px;">
+                    <div>
+                        <strong style="font-size:1rem; color:#333;">Cash Payment</strong><br>
+                        <small style="color:#666;">Pay at counter upon arrival.</small>
+                    </div>
+                </label>
+
+                <button id="confirm-payment-btn" class="confirm-btn" style="width:100%; padding:15px; background-color:#20621E; color:white; border:none; border-radius:8px; font-size:1.1rem; font-weight:bold; cursor:pointer; transition:background 0.3s;">
+                    Confirm & Pay
+                </button>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <div class="checkout-section order-summary-card" style="position:sticky; top:20px;">
+                <h2 class="section-title">Order Summary</h2>
+                
+                <div id="summary-img-container" class="summary-collage-container">
+                    <img id="summary-img" src="https://placehold.co/400x250?text=Loading..." alt="Package">
+                </div>
+                
+                <h3 id="summary-title" style="margin-bottom:5px; color:#333; font-family:'Playfair Display', serif;">Loading Booking...</h3>
+                
+                <div id="summary-details-toggle" class="summary-toggle-btn">
+                    <p id="summary-type" style="margin:0;">Checking Details</p>
+                    <span id="summary-toggle-icon">▼</span>
+                </div>
+
+                <ul id="summary-activities-list"></ul>
+
+                <div class="summary-row" id="row-date-start" style="display:flex; justify-content:space-between; margin-bottom:10px; margin-top: 15px;">
+                    <span id="label-date-start" style="color:#555;">Date</span>
+                    <span id="summary-date-start" style="font-weight:600;">...</span>
+                </div>
+                
+                <div class="summary-row" id="row-date-end" style="display:none; justify-content:space-between; margin-bottom:10px;">
+                    <span style="color:#555;">Departure</span>
+                    <span id="summary-date-end" style="font-weight:600;">...</span>
+                </div>
+
+                <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <span style="color:#555;">Total Pax</span>
+                    <span id="summary-pax" style="font-weight:600;">0</span>
+                </div>
+                
+                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+
+                <div class="summary-row" style="display:flex; align-items:center; background:#f9fdf9; padding:10px; border-radius:6px; border:1px solid #e0e0e0; margin-bottom: 15px;">
+                    <input type="checkbox" id="donate-checkbox" style="margin-right:10px; width:18px; height:18px; cursor:pointer;">
+                    <label for="donate-checkbox" style="color:#20621E; font-weight:600; cursor:pointer; font-size:0.95rem;">
+                        Do you want to donate RM1 for maintain Eco-Attractions?
+                    </label>
+                </div>
+                
+                <div class="summary-total" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:1.1rem; font-weight:bold;">Total</span>
+                    <span id="summary-total-cost" style="font-size:1.3rem; font-weight:bold; color:#20621E;">RM 0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div id="chat-widget" class="chat-widget">
+      <div class="chat-header">
+        <span>🤖 EduGreen AI Assistant</span>
+        <span id="close-chat" style="cursor:pointer;">&times;</span>
+      </div>
+      <div class="chat-body" id="chat-messages">
+        <div class="bot-msg">Hello! Ask me about Tanjung Malim tourism.</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type your question..." />
+        <button id="send-chat-btn">➤</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
